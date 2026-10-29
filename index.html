@@ -190,8 +190,9 @@ section{padding-block:clamp(72px,10vw,130px);position:relative}
   .hero .wrap{grid-template-columns:1fr}
   .hero-visual{max-width:330px}
   .c1{left:-2%}
-  .c2{right:0;top:auto;bottom:16%}
-  .c3{bottom:-1%;left:-3%}
+  /* Наклейки уводим с лица: одна на руку слева, вторая на нижний край рамки */
+  .c2{right:-2%;top:auto;bottom:-4%}
+  .c3{left:-3%;bottom:auto;top:66%}
 }
 @media (max-width:360px){
   .chip{font-size:13px;padding:9px 13px 9px 9px;gap:8px}
@@ -237,7 +238,8 @@ section{padding-block:clamp(72px,10vw,130px);position:relative}
 .svc li::before{content:"";width:9px;height:9px;flex:none;background:var(--gold);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);transform:translateY(-1px)}
 @media (max-width:1060px){.services{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){
-  .services{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;
+  /* proximity вместо mandatory: карусель не перехватывает вертикальный свайп страницы */
+  .services{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;overscroll-behavior-x:contain;overscroll-behavior-y:auto;touch-action:pan-x pan-y pinch-zoom;
     margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));padding-block:14px 20px;scrollbar-width:none}
   .services::-webkit-scrollbar{display:none}
   .svc{scroll-snap-align:center;transition:scale .25s ease-out,rotate .25s ease-out}
@@ -309,7 +311,7 @@ section{padding-block:clamp(72px,10vw,130px);position:relative}
 .pol.wiggle{animation:wiggle .6s}
 @keyframes wiggle{20%{rotate:-12deg}40%{rotate:10deg}60%{rotate:-6deg}80%{rotate:4deg}}
 .wall-hint{position:absolute;right:22px;bottom:16px;font-family:var(--f-hand);font-size:26px;color:var(--lilac);pointer-events:none;rotate:-3deg}
-@media (max-width:640px){.wall{height:660px}.pol{width:148px;padding:8px 8px 10px}.pol .cap{font-size:18px}}
+@media (max-width:640px){.wall{height:620px}.pol{width:124px;padding:7px 7px 9px}.pol .cap{font-size:15.5px;margin-top:7px}.pol .tape{width:64px;height:20px;top:-9px}}
 
 /* Калькулятор */
 .calc{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
@@ -339,7 +341,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 @media (max-width:900px){.calc{grid-template-columns:1fr}}
 
 /* Отзывы */
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.reviews{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .rev{margin:0;border-radius:var(--r);padding:30px 28px;background:var(--glass);border:1px solid var(--line);position:relative;min-width:0;transition:transform .45s cubic-bezier(.3,1.6,.5,1),border-color .3s,filter 1s}
 .rev:hover{border-color:rgba(167,139,250,.5)}
 .rev .q{font-family:var(--f-display);font-size:64px;line-height:.6;height:30px;display:block;color:var(--violet)}
@@ -352,6 +354,38 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 .stars-row i{width:13px;height:13px;background:var(--gold);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
 .example{position:absolute;top:16px;right:16px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--muted);border-radius:6px;padding:2px 8px}
 @media (max-width:900px){.reviews{grid-template-columns:1fr}}
+.rev-src{margin:22px 0 0;color:var(--muted);font-size:14.5px}
+@media (max-width:480px){
+  /* Имя и аватарка на узком экране встают столбиком */
+  .rev{padding:24px 20px}
+  .rev-who{flex-direction:column;align-items:flex-start;gap:9px;margin-top:20px}
+  .rev-who b{font-size:15.5px}
+  .rev-who small{font-size:13.5px}
+}
+.rev-src a{color:var(--lilac);text-underline-offset:3px}
+/* ---------- Частые вопросы ---------- */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{border:1px solid var(--line);border-radius:22px;background:var(--glass);overflow:hidden;transition:border-color .3s,background .3s}
+.faq details[open]{border-color:rgba(201,168,255,.4);background:var(--glass2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:20px 22px;font-family:var(--f-display);font-weight:700;font-size:clamp(15px,2.2vw,18.5px);line-height:1.35;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:focus-visible{outline:2px solid var(--lilac);outline-offset:-2px;border-radius:22px}
+.faq .mark{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--glass2);border:1px solid var(--line);position:relative;transition:background .3s,rotate .3s}
+.faq .mark::before,.faq .mark::after{content:"";position:absolute;background:var(--lilac);border-radius:2px;transition:opacity .25s,background .3s}
+.faq .mark::before{width:13px;height:2.5px}
+.faq .mark::after{width:2.5px;height:13px}
+.faq details[open] .mark{background:var(--gold-grad);rotate:180deg}
+.faq details[open] .mark::before{background:var(--on)}
+.faq details[open] .mark::after{opacity:0}
+.faq .ans{padding:0 22px 22px 68px;color:var(--muted);font-size:16px;line-height:1.65}
+.faq .ans p{margin:0 0 10px}
+.faq .ans p:last-child{margin-bottom:0}
+.faq .ans b{color:var(--ink);font-weight:700}
+@media (max-width:600px){
+  .faq summary{padding:16px 16px;gap:12px}
+  .faq .mark{width:26px;height:26px}
+  .faq .ans{padding:0 16px 18px 16px;font-size:15.5px}
+}
 
 /* Контакты */
 .cta-sec{padding-block:clamp(40px,6vw,90px)}
@@ -376,11 +410,22 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 @media (max-width:600px){
   .cta{padding:30px 20px;border-radius:30px;gap:26px}
   .cta-box{gap:10px}
-  .phone{padding:10px 10px 10px 16px;font-size:clamp(14px,4.3vw,19px)}
+  .phone{padding:10px 10px 10px 16px;font-size:clamp(12.6px,4.1vw,19px);gap:8px}
   .copy{width:40px;height:40px;padding:0;justify-content:center}
   .copy span{display:none}
   .msgs a{padding:14px 8px;font-size:15.5px;gap:7px}
   .cta .btn-gold{padding:16px 14px;font-size:15.5px}
+}
+@media (max-width:380px){
+  .phone{padding:10px 8px 10px 12px;gap:6px}
+}
+/* Узкие телефоны: настоящий Unbounded шире запасного, тексты не должны обрезаться */
+@media (max-width:480px){
+  /* Два счётчика в одну колонку: длинным подписям нужна ширина */
+  .stats{grid-template-columns:1fr;gap:12px}
+  .stat{padding:20px 20px}
+  .stat b{font-size:clamp(30px,9vw,58px)}
+  .stat span{font-size:14.5px;margin-top:8px}
 }
 .foot{padding-block:30px 44px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 .foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
@@ -414,7 +459,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 
 <div class="bg-glow" aria-hidden="true"></div>
 
-<div class="demo-ribbon"><div class="wrap">Демо-версия: цифры, отзывы и фото на стене новосёлов пока примерные. Заменим на настоящие перед запуском.</div></div>
+<div class="demo-ribbon"><div class="wrap">Демо-версия: фото на стене новосёлов и ответы в разделе «Вопросы» пока черновые.</div></div>
 
 <header class="top">
   <div class="wrap">
@@ -427,6 +472,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
       <a href="#about">Обо мне</a>
       <a href="#wall">Новосёлы</a>
       <a href="#calc">Ипотека</a>
+      <a href="#faq">Вопросы</a>
       <a href="#reviews">Отзывы</a>
     </nav>
     <div class="top-right">
@@ -547,9 +593,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
         <span class="sign gtext">— ваша Альбина</span>
       </div>
       <div class="stats">
-        <div class="stat rise" style="--c:#8B5CF6"><b data-count="7">7</b><span>лет в недвижимости</span></div>
-        <div class="stat rise" style="--c:#D946EF"><b data-count="350" data-suffix="+">350+</b><span>закрытых сделок</span></div>
-        <div class="stat rise" style="--c:#FF5FA8"><b data-count="0">0</b><span>сорванных сделок по моей вине</span></div>
+        <div class="stat rise" style="--c:#8B5CF6"><b data-count="13">13</b><span>лет в недвижимости</span></div>
         <div class="stat rise" style="--c:#FFD27A"><b data-count="80" data-suffix="%">80%</b><span>клиентов приходят по рекомендации</span></div>
       </div>
     </div>
@@ -625,21 +669,73 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
     </div>
   </section>
 
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow">Спрашивают чаще всего</span><h2 class="split">Отвечаю честно</h2></div>
+      </div>
+      <div class="faq">
+        <details class="rise">
+          <summary><span class="mark" aria-hidden="true"></span>Как обезопасить себя, когда сдаёшь квартиру?</summary>
+          <div class="ans">
+            <p><b>Договор — всегда</b>, даже если жильцы кажутся идеальными. В нём прописываем срок, размер и дату платежа, депозит, кто платит за коммуналку и как часто собственник может приезжать.</p>
+            <p>К договору — <b>акт приёма-передачи с описью</b> техники и мебели и фотографиями на день заезда. Паспорт я смотрю лично и сверяю с человеком, который стоит передо мной. Деньги — переводом, чтобы остался след.</p>
+            <p>Эти полчаса бумажной работы потом экономят месяцы нервов. Я их не пропускаю никогда.</p>
+          </div>
+        </details>
+        <details class="rise">
+          <summary><span class="mark" aria-hidden="true"></span>На что смотреть при покупке квартиры?</summary>
+          <div class="ans">
+            <p><b>Сначала документы, потом обои.</b> Кто собственник и сколько их, как квартира досталась, нет ли прописанных и несовершеннолетних, был ли маткапитал и выделены ли доли, нет ли долгов и обременений.</p>
+            <p>Дальше сам дом: год постройки, состояние труб и проводки, крыша, подъезд, соседи. И отдельно — <b>перепланировки</b>: если стены двигали без согласования, разбираться придётся новому владельцу, то есть вам.</p>
+          </div>
+        </details>
+        <details class="rise">
+          <summary><span class="mark" aria-hidden="true"></span>Новостройка или вторичка — во что лучше вложиться?</summary>
+          <div class="ans">
+            <p>Зависит от того, зачем покупаете. <b>Жить прямо сейчас</b> — вторичка в обжитом районе: заехали и живёте, рядом школа, садик, магазины.</p>
+            <p><b>Готовы подождать</b> — новостройка, но считайте не только цену, а ещё ремонт, мебель и месяцы аренды, пока дом строится.</p>
+            <p><b>Под сдачу</b> — смотрите не на красоту, а на спрос: что рядом, кто будет снимать и за сколько. Эти деньги мы считаем до покупки, а не после.</p>
+          </div>
+        </details>
+        <details class="rise">
+          <summary><span class="mark" aria-hidden="true"></span>С чего начать, если хочу квартиру в ипотеку?</summary>
+          <div class="ans">
+            <p><b>С одобрения, а не с просмотров.</b> Сначала считаем реальный бюджет: платёж, который не душит, первый взнос, маткапитал и льготные программы, если они вам подходят.</p>
+            <p>Потом подаём заявки сразу в несколько банков — одобрение действует несколько месяцев, и с ним вы торгуетесь как покупатель с деньгами, а не как «я подумаю». И только потом смотрим квартиры.</p>
+          </div>
+        </details>
+        <details class="rise">
+          <summary><span class="mark" aria-hidden="true"></span>Зачем риелтор, если объявления есть у всех?</summary>
+          <div class="ans">
+            <p>Объявления и правда открыты всем, и показать вам ссылку — не работа. Я <b>проверяю документы и собственника</b>, веду торг, держу сроки и отвечаю за то, чтобы сделка не развалилась на полпути.</p>
+            <p>А если вижу, что в вашем случае справитесь сами, — так и скажу. Это честнее, чем взять деньги за воздух.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section id="reviews">
     <div class="wrap">
       <div class="sec-head">
         <div><span class="eyebrow">Что говорят клиенты</span><h2 class="split">Друзья, а не «клиенты»</h2></div>
       </div>
       <div class="reviews">
-        <figure class="rev rise"><span class="example">пример</span><span class="q">“</span>
-          <p>Купили первую квартиру в ипотеку и ни разу не нервничали. Альбина отвечала даже в одиннадцать вечера, а на новоселье пришла с тортом.</p>
-          <figcaption class="rev-who"><span class="ava">МК</span><span><b>Мария и Кирилл</b><small>двушка в новостройке</small><span class="stars-row"><i></i><i></i><i></i><i></i><i></i></span></span></figcaption></figure>
-        <figure class="rev rise"><span class="example">пример</span><span class="q">“</span>
-          <p>Продала мамину квартиру за три недели и дороже, чем рассчитывала. Все показы Альбина провела сама, мне оставалось только подписать.</p>
-          <figcaption class="rev-who"><span class="ava">Е</span><span><b>Елена</b><small>продажа вторички</small><span class="stars-row"><i></i><i></i><i></i><i></i><i></i></span></span></figcaption></figure>
-        <figure class="rev rise"><span class="example">пример</span><span class="q">“</span>
-          <p>Искали аренду с котом и собакой, все отказывали. Альбина нашла квартиру за неделю и договорилась с хозяйкой. Теперь советуем её всем.</p>
-          <figcaption class="rev-who"><span class="ava">ДА</span><span><b>Денис и Аня</b><small>аренда</small><span class="stars-row"><i></i><i></i><i></i><i></i><i></i></span></span></figcaption></figure>
+        <figure class="rev rise"><span class="q">“</span>
+          <p>Очень приятный и отзывчивый риелтор. В кратчайшие сроки нашла квартиру — у меня время поджимало. С этой не сложилось, не успел, но она уже на следующий день нашла очень хороший и недорогой вариант. Уже заселился и не нарадуюсь. Всем советую.</p>
+          <figcaption class="rev-who"><span class="ava">А</span><span><b>Александр</b><small>аренда однокомнатной · август 2023</small></span></figcaption></figure>
+        <figure class="rev rise"><span class="q">“</span>
+          <p>Сразу видно: риелтор с опытом. Всё рассказала, объяснила, помогла в составлении договора.</p>
+          <figcaption class="rev-who"><span class="ava">ВА</span><span><b>Валентина Александровна</b><small>аренда однокомнатной · сентябрь 2023</small></span></figcaption></figure>
+        <figure class="rev rise"><span class="q">“</span>
+          <p>Всё прошло отлично: списались, договорились, посмотрели квартиру в один день, составили договор. Подошли ответственно к своей работе, спасибо!</p>
+          <figcaption class="rev-who"><span class="ava">АБ</span><span><b>Алеся Бакирова</b><small>аренда однокомнатной · сентябрь 2023</small></span></figcaption></figure>
+        <figure class="rev rise"><span class="q">“</span>
+          <p>Быстро договорились, посмотрели и сняли квартиру! А также были предоставлены дополнительно ещё варианты квартир, помимо этой. Приятно было иметь дело!</p>
+          <figcaption class="rev-who"><span class="ava">МТ</span><span><b>Милана Таганьязова</b><small>аренда однокомнатной · май 2024</small></span></figcaption></figure>
+      </div>
+      <p class="rev-src">Все отзывы — с профиля на Авито, их можно <a href="https://www.avito.ru/user/25c3f740630a0da4b1a34db81b96e2d4/profile" target="_blank" rel="noopener">проверить</a>.</p>
       </div>
     </div>
   </section>
@@ -961,7 +1057,9 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
   }
   var wall = $('wallBox'), z = 10;
   function layout(){
-    var W = wall.clientWidth, H = wall.clientHeight, small = W < 640, pw = small ? 148 : 210, ph = pw * 1.25;
+    var first = wall.querySelector('.pol');
+    var W = wall.clientWidth, H = wall.clientHeight, small = W < 640;
+    var pw = first && first.offsetWidth ? first.offsetWidth : (small ? 124 : 210), ph = pw * 1.25;
     var colsN = small ? 2 : Math.min(4, Math.max(2, Math.floor(W / (pw * 1.05))));
     var rows = Math.ceil(pols.length / colsN);
     [].forEach.call(wall.querySelectorAll('.pol'), function(el, i){
@@ -975,7 +1073,8 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
   }
   pols.forEach(function(p, i){
     var el = document.createElement('div');
-    el.className = 'pol'; el.style.rotate = ((i*47) % 22 - 11) + 'deg'; el.style.zIndex = i + 1;
+    // Слои в обратном порядке: нижняя карточка не накрывает подпись верхней
+    el.className = 'pol'; el.style.rotate = ((i*47) % 22 - 11) + 'deg'; el.style.zIndex = pols.length - i;
     el.innerHTML = '<span class="tape"></span><div class="pic">' + scene(p, i) + (p.img ? '<img src="' + p.img + '" alt="' + p.cap + '" loading="lazy" draggable="false" onerror="this.remove()">' : '') + '</div><div class="cap">' + p.cap + '</div>';
     wall.appendChild(el);
     var sx0, sy0, ox, oy, moved = false, rot0;
