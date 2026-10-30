@@ -188,6 +188,38 @@ section{padding-block:clamp(72px,10vw,130px);position:relative}
 @media (max-width:900px){
   .hero .wrap{grid-template-columns:1fr}
   .hero-visual{max-width:330px}
+  /* Первый экран должен влезать целиком: фото видно без прокрутки */
+  .hero{padding-block:10px 28px}
+  .hero .wrap{gap:14px}
+  .hi{font-size:clamp(20px,5.6vw,26px)}
+  .hero h1{font-size:clamp(32px,10.2cqi,56px);margin-top:0}
+  .lead{font-size:clamp(14.5px,3.7vw,16px);margin-top:10px;max-width:none;line-height:1.5}
+  .lead-2{display:inline-block;margin-top:5px}
+  .hero-cta{margin-top:14px;gap:9px}
+  .hero-cta .btn{padding:13px 18px;font-size:15px}
+  .hero-tags{display:none}
+  .hero-visual{max-width:min(258px,60vw)}
+  .key-btn{width:78px;height:78px}
+  .chip{font-size:12.5px;padding:8px 12px 8px 8px;gap:8px}
+  .chip .ico{width:24px;height:24px}
+}
+/* Короткие экраны (iPhone SE/8 и мельче): ужимаем ещё, чтобы фото было видно сразу */
+@media (max-width:900px) and (max-height:740px){
+  .hero{padding-block:4px 16px}
+  .hero .wrap{gap:10px}
+  .hi{font-size:17px}
+  .hero h1{font-size:clamp(28px,8.4cqi,42px)}
+  .lead{font-size:13.5px;margin-top:8px;line-height:1.45}
+  .lead-2{margin-top:3px}
+  .hero-cta{margin-top:10px;gap:8px}
+  .hero-cta .btn{padding:11px 15px;font-size:14px}
+  .hero-visual{max-width:min(196px,47vw)}
+  .key-btn{width:60px;height:60px}
+  .key-ring{display:none}
+  .c1{display:none}
+  .chip{font-size:11.5px;padding:7px 10px 7px 7px;gap:6px}
+  .chip .ico{width:21px;height:21px}
+  .chip .ico svg{width:12px;height:12px}
   .c1{left:-2%}
   /* Наклейки уводим с лица: одна на руку слева, вторая на нижний край рамки */
   .c2{right:-2%;top:auto;bottom:-4%}
@@ -391,7 +423,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 .cta{border-radius:40px;padding:clamp(28px,6vw,76px);position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;
   background:linear-gradient(135deg,#5B21B6,#7C3AED 60%,#8B5CF6);box-shadow:0 40px 100px -40px rgba(124,58,237,.8)}
 .cta > div{min-width:0}
-.cta h2{font-size:clamp(34px,5.6vw,76px)}
+.cta h2{font-size:clamp(25px,3.6vw,46px);line-height:1.18;max-width:17ch}
 .cta p{font-size:19px;margin-top:18px;max-width:36ch;color:#F6EDFF}
 .cta-box{display:grid;gap:12px;position:relative;z-index:1;min-width:0}
 .phone{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(20,6,40,.28);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:14px 14px 14px 18px;font-family:var(--f-display);font-weight:700;font-size:clamp(15px,4.4vw,24px);white-space:nowrap;backdrop-filter:blur(10px)}
@@ -426,6 +458,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
   .stat b{font-size:clamp(30px,9vw,58px)}
   .stat span{font-size:14.5px;margin-top:8px}
 }
+.req{display:inline-block;margin-top:7px;color:var(--muted);font-size:12.5px;line-height:1.5}
 .foot{padding-block:30px 44px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 .foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
 
@@ -495,12 +528,12 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
         <h1 aria-label="Альбина!">
           <span class="ch" style="--i:0">А</span><span class="ch" style="--i:1">л</span><span class="ch" style="--i:2">ь</span><span class="ch" style="--i:3">б</span><span class="ch" style="--i:4">и</span><span class="ch" style="--i:5">н</span><span class="ch" style="--i:6">а</span><span class="ch bang" style="--i:7">!</span>
         </h1>
-        <p class="lead">Помогаю <b>купить, продать и снять</b> жильё в Казани и <b>оформить ипотеку</b>. Документы и торг беру на себя, а вы спокойно выбираете обои.</p>
+        <p class="lead">Помогу <b>купить, продать, снять</b> жильё в Казани, помогу <b>с ипотекой</b>. В общем, решу любой ваш вопрос с недвижимостью 🙌🏻<br><span class="lead-2">Документы и торг беру на себя, а вы спокойно выбираете обои.</span></p>
         <div class="hero-cta">
           <a class="btn btn-main magnet" href="#contact">Хочу свой дом
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a class="btn btn-glass magnet" href="#calc">Посчитать ипотеку</a>
+          <a class="btn btn-glass magnet" href="#calc">Рассчитать ипотеку</a>
         </div>
         <div class="hero-tags">
           <span class="tag">Новостройки</span><span class="tag">Вторичка</span><span class="tag">Аренда</span><span class="tag">Ипотека и маткапитал</span>
@@ -546,8 +579,8 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
         <article class="svc rise tilt" style="--c:linear-gradient(135deg,#8B5CF6,#6D28D9);--cg:rgba(139,92,246,.8)">
           <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
           <h3>Покупка</h3>
-          <p>Найду квартиру под ваш бюджет и привычки, а не под мой процент.</p>
-          <ul><li>Подбор и просмотры</li><li>Проверка юридической чистоты</li><li>Торг за вашу скидку</li></ul>
+          <p>Найду квартиру под ваш бюджет и привычки.</p>
+          <ul><li>Подбор и просмотры</li><li>Проверка юридической чистоты</li><li>Торг с продавцом</li></ul>
         </article>
         <article class="svc rise tilt" style="--c:linear-gradient(135deg,#D946EF,#A21CAF);--cg:rgba(217,70,239,.8)">
           <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V5a1 1 0 00-1-1h-7L3 13l8 8 9-9z"/><circle cx="15.5" cy="8.5" r="1.5"/></svg></div>
@@ -586,7 +619,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
       <div class="about-text rise">
         <span class="eyebrow">Обо мне</span>
         <h2 class="split">Риелтор, которого зовут на новоселье</h2>
-        <p>Для меня сделка — это не бумажки, а люди. Я объясняю всё по-человечески, отвечаю даже на вопросы «а можно глупый вопрос?» и не пропадаю после аванса.</p>
+        <p>Для меня сделка — это не бумажки, а люди. Я объясняю всё простыми словами, отвечаю на любые вопросы и всегда буду на связи 🤝</p>
         <p>Со многими клиентами мы до сих пор дружим: они присылают фото ёлки в новой гостиной и приводят ко мне друзей. Лучшего отзыва я не знаю.</p>
         <span class="sign gtext">— ваша Альбина</span>
       </div>
@@ -605,11 +638,11 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
       </div>
       <div class="steps" id="steps">
         <div class="steps-line" aria-hidden="true"><i></i></div>
-        <div class="step"><div class="step-n">1</div><h3>Знакомимся</h3><p>Созваниваемся или пьём кофе, обсуждаем, что вам нужно.</p></div>
+        <div class="step"><div class="step-n">1</div><h3>Знакомимся</h3><p>Созваниваемся или встречаемся за чашечкой кофе — обсуждаем, что вам нужно.</p></div>
         <div class="step"><div class="step-n">2</div><h3>План и бюджет</h3><p>Считаем деньги, ипотеку и сроки без сюрпризов.</p></div>
         <div class="step"><div class="step-n">3</div><h3>Ищем и смотрим</h3><p>Отбираю варианты, вы смотрите только стоящие.</p></div>
         <div class="step"><div class="step-n">4</div><h3>Проверяем и торгуемся</h3><p>Документы, история квартиры, лучшая цена.</p></div>
-        <div class="step"><div class="step-n">5</div><h3>Сделка и ключи</h3><p>Подписываем, регистрируем и фотографируемся с ключами.</p></div>
+        <div class="step"><div class="step-n">5</div><h3>Сделка и ключи</h3><p>Подписываем, регистрируем и фотографируемся с ключами. На всех этапах — юридическое сопровождение.</p></div>
       </div>
     </div>
   </section>
@@ -676,7 +709,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
         <details class="rise">
           <summary><span class="mark" aria-hidden="true"></span>Как обезопасить себя, когда сдаёшь квартиру?</summary>
           <div class="ans">
-            <p><b>Договор — всегда</b>, даже если жильцы кажутся идеальными. В нём прописываем срок, размер и дату платежа, депозит, кто платит за коммуналку и как часто собственник может приезжать.</p>
+            <p><b>Договор — всегда</b>, даже если жильцы кажутся идеальными. В нём прописываем срок, размер и дату платежа, депозит, кто оплачивает коммунальные платежи и как часто собственник может приезжать.</p>
             <p>К договору — <b>акт приёма-передачи с описью</b> техники и мебели и фотографиями на день заезда. Паспорт я смотрю лично и сверяю с человеком, который стоит передо мной. Деньги — переводом, чтобы остался след.</p>
             <p>Эти полчаса бумажной работы потом экономят месяцы нервов. Я их не пропускаю никогда.</p>
           </div>
@@ -742,7 +775,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
     <div class="wrap">
       <div class="cta rise" id="ctaBox">
         <div>
-          <h2>Давай найдём твой дом</h2>
+          <h2>Дом — это не просто стены, это место, где вам должно быть хорошо</h2>
           <p>Напишите в Telegram <b>@albina_agent_kzn</b> или позвоните. Первая консультация бесплатно и ни к чему не обязывает.</p>
         </div>
         <div class="cta-box">
@@ -758,7 +791,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
   </section>
 </main>
 
-<footer class="foot"><div class="wrap"><span>© <span id="yr">2026</span> Альбина, риелтор в Казани</span><span class="gtext" style="font-family:var(--f-hand);font-size:24px;font-weight:700">с любовью к вашим новосельям</span></div></footer>
+<footer class="foot"><div class="wrap"><span>© <span id="yr">2026</span> Альбина, риелтор в Казани<br><small class="req">ИП · ОГРНИП 319169000035959 · ИНН 166109739850 · в реестре с 28 февраля 2019 г.</small></span><span class="gtext" style="font-family:var(--f-hand);font-size:24px;font-weight:700">с любовью к вашим новосельям</span></div></footer>
 
 <nav class="mbar" id="mbar" aria-label="Быстрая связь">
   <a class="btn btn-main" href="https://t.me/albina_agent_kzn" target="_blank" rel="noopener">Telegram</a>
