@@ -801,6 +801,15 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 <div class="toast" id="toast" role="status"></div>
 
 <script>
+/* Браузер не должен восстанавливать прокрутку: сайт всегда открывается с самого верха */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+(function(){
+  function top(){ if (!location.hash) window.scrollTo(0, 0); }
+  top();
+  document.addEventListener('DOMContentLoaded', top);
+  window.addEventListener('load', function(){ top(); setTimeout(top, 60); });
+  window.addEventListener('pageshow', function(e){ if (e.persisted) top(); });
+})();
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(pointer:fine)').matches, touch = matchMedia('(hover:none)').matches;
